@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">Marvel Heroes</string>
+    <string name="app_name">Marvel Universe</string>
+    <string name="characters">Personajes</string>
+    <string name="marvel_universe">Marvel Universe</string>
+    <string name="comic_name">Comic\'s Name</string>
+    <string name="character_name">Character\'s Name</string>
+    <string name="event_name">Event\'s Name</string>
+    <string name="events">Events</string>
+    <string name="comics">Comics</string>
+    <string name="comics_title">Comics</string>
+    <string name="events_title">Eventos</string>
 </resources>
