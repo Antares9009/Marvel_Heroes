@@ -50,8 +50,8 @@ class ComicHomeFragment : Fragment() {
 
     private fun initViewModels(){
         viewModel.getCharacters()
-        //viewModel.getComics()
-        //viewModel.getEvents()
+        viewModel.getComics()
+        viewModel.getEvents()
     }
 
     private fun initViews(){
@@ -80,14 +80,15 @@ class ComicHomeFragment : Fragment() {
         viewModel.characters.observe(viewLifecycleOwner) { response ->
             when(response) {
                 is Resource.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
+                    binding.shimmerViewContainer1.startShimmer()
                 }
                 is Resource.Success -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.shimmerViewContainer1.stopShimmer()
+                    hideShimmerContainer()
                     handleCharacterResponse(response.value)
                 }
                 is Resource.Failure -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.shimmerViewContainer3.stopShimmer()
                     handleCharacterFailure(response.messageError)
                 }
             }
@@ -96,14 +97,16 @@ class ComicHomeFragment : Fragment() {
         viewModel.comics.observe(viewLifecycleOwner) { response ->
             when(response) {
                 is Resource.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
+                    binding.shimmerViewContainer2.startShimmer()
                 }
                 is Resource.Success -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.shimmerViewContainer2.stopShimmer()
+                    hideShimmerContainer()
                     handleComicResponse(response.value)
                 }
                 is Resource.Failure -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.shimmerViewContainer2.stopShimmer()
+                    hideShimmerContainer()
                     handleComicFailure(response.messageError)
                 }
             }
@@ -112,17 +115,27 @@ class ComicHomeFragment : Fragment() {
         viewModel.events.observe(viewLifecycleOwner) { response ->
             when(response) {
                 is Resource.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
+                    binding.shimmerViewContainer3.startShimmer()
                 }
                 is Resource.Success -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.shimmerViewContainer3.stopShimmer()
+                    hideShimmerContainer()
                     handleEventResponse(response.value)
                 }
                 is Resource.Failure -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.shimmerViewContainer3.stopShimmer()
+                    hideShimmerContainer()
                     handleEventFailure(response.messageError)
                 }
             }
+        }
+    }
+
+    private fun hideShimmerContainer(){
+        binding.apply {
+            shimmerViewContainer1.visibility = View.GONE
+            shimmerViewContainer2.visibility = View.GONE
+            shimmerViewContainer3.visibility = View.GONE
         }
     }
 

@@ -36,8 +36,8 @@ class ComicViewModel @Inject constructor(
     val events: LiveData<Resource<List<Events>>>
         get() = _events
 
-    private val _detailCharacter: MutableLiveData<Resource<List<Characters>>> = MutableLiveData()
-    val detailCharacter : LiveData<Resource<List<Characters>>>
+    private val _detailCharacter: MutableLiveData<Resource<Characters>> = MutableLiveData()
+    val detailCharacter : LiveData<Resource<Characters>>
         get() =  _detailCharacter
 
 
@@ -72,8 +72,8 @@ class ComicViewModel @Inject constructor(
 
     fun getCharacterDetail(characterId: Int) = viewModelScope.launch(handlerException) {
         Log.i("ComicResponse",characterId.toString())
-        Log.i("ComicResponse",repository.getCharacter(characterId).toString())
+        Log.i("ComicResponse",repository.getCharacter(characterId).data.results[0].stories.toString())
         _detailCharacter.postValue(Resource.Loading)
-        _detailCharacter.postValue(Resource.Success(repository.getCharacter(characterId).data.results))
+        _detailCharacter.postValue(Resource.Success(repository.getCharacter(characterId).data.results[0]))
     }
 }

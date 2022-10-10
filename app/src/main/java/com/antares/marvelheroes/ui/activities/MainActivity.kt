@@ -1,7 +1,8 @@
-package com.antares.marvelheroes
+package com.antares.marvelheroes.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.antares.marvelheroes.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

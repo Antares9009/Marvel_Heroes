@@ -37,7 +37,7 @@ class CharacterDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getCharacterDetails()
-
+        initObservers()
         requireActivity().onBackPressedDispatcher
             .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
@@ -57,7 +57,7 @@ class CharacterDetailFragment : Fragment() {
                     Log.i("DetailsCharacter","Loading")
                 }
                 is Resource.Success -> {
-                    //handleSuccess(character.value)
+                    handleSuccess(character.value)
                 }
                 is Resource.Failure -> {
                     handleFailure()
@@ -71,8 +71,9 @@ class CharacterDetailFragment : Fragment() {
     }
 
     private fun handleSuccess(character: Result){
-        val urlImage = character.thumbnail.path.plus("/portrait_medium.").plus(character.thumbnail.extension)
+        val urlImage = character.thumbnail.path.plus(".").plus(character.thumbnail.extension)
         binding.apply {
+            tvDescription.text = character.description
             tvDetailName.text = character.name
             Glide.with(ivDetail.context).load(urlImage).into(ivDetail)
         }
