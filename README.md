@@ -1,5 +1,4 @@
 # Marvel_Heroes
-Initial Commit
 
 Practical Test using:
 
